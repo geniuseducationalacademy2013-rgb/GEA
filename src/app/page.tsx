@@ -85,38 +85,34 @@ export default function Home() {
       <section className="py-12 md:py-16 bg-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-8 md:mb-12">Why Choose Us?</h2>
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-start">
-            {/* Video on Left */}
-            <div className="flex justify-center">
-              <div className="w-full max-w-xs md:max-w-sm">
-                <YouTubePlayer
-                  url="https://youtube.com/shorts/wPM77tbr_Hg"
-                  title="Why Choose Genius"
-                  className="aspect-[9/16]"
-                />
-              </div>
+          
+          <div className="flex flex-row items-center gap-4 sm:gap-6 lg:gap-12">
+            {/* Left Side - Video */}
+            <div className="w-28 sm:w-40 md:w-48 lg:w-64 flex-shrink-0">
+              <YouTubePlayer
+                url="https://youtube.com/shorts/wPM77tbr_Hg"
+                title="Why Choose Genius"
+                className="aspect-[9/16] rounded-lg overflow-hidden shadow-lg"
+              />
             </div>
-            {/* Images on Right */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
+
+            {/* Right Side - All Images */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6 flex-1">
               {[
-                {
-                  image: "/content/home_images/didgitalscreenandcctv.png",
-                  title: "Digital Class Room & Under CCTV Security",
-                },
-                { image: "/content/home_images/highqualifiedteacher.png", title: "Highly Qualified Teachers" },
+                { image: "/content/home_images/didgitalscreenandcctv.png", title: "Digital Class Room & CCTV" },
+                { image: "/content/home_images/highqualifiedteacher.png", title: "Qualified Teachers" },
                 { image: "/content/home_images/ac.png", title: "AC Class Rooms" },
-                { image: "/content/home_images/25students.png", title: "Only 25 Students Per Batch" },
                 { image: "/content/home_images/weeklytests.png", title: "Weekly Test" },
-                { image: "/content/home_images/ptm.jpg", title: "Monthly Parents Meeting" },
-                { image: "/content/home_images/extrahours.png", title: "Extra Study Hours" },
+                { image: "/content/home_images/ptm.jpg", title: "Parents Meeting" },
+                { image: "/content/home_images/extrahours.png", title: "Extra Hours" },
               ].map((feature, index) => (
-                <div key={index} className="text-center flex flex-col items-center">
+                <div key={index} className="text-center">
                   <img
                     src={feature.image}
                     alt={feature.title}
-                    className="w-16 h-16 sm:w-24 sm:h-24 md:w-36 md:h-36 object-contain"
+                    className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 object-contain mx-auto"
                   />
-                  <h3 className="mt-2 text-[11px] sm:text-sm font-semibold text-gray-800 leading-tight">{feature.title}</h3>
+                  <p className="mt-1 sm:mt-2 text-[9px] sm:text-xs md:text-sm lg:text-base font-semibold text-gray-800 leading-tight">{feature.title}</p>
                 </div>
               ))}
             </div>
