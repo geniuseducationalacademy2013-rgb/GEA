@@ -4,12 +4,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSlider from "@/components/HeroSlider";
 import YouTubePlayer from "@/components/YouTubePlayer";
+import QuickNeedsBanner from "@/components/QuickNeedsBanner";
 
 export default function Home() {
   return (
     <main>
       <Navbar />
-      <div className="pt-24">
+      <div className="pt-20">
+        <QuickNeedsBanner />
         <div className="mt-2">
           <HeroSlider />
         </div>
@@ -83,22 +85,41 @@ export default function Home() {
       <section className="py-16 bg-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-12">Why Choose Us?</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { icon: "🖥️", title: "Digital Class Room" },
-              { icon: "👨‍🏫", title: "Highly Qualified Teachers" },
-              { icon: "❄️", title: "AC Class Rooms" },
-              { icon: "📹", title: "Under CCTV Security" },
-              { icon: "👥", title: "Only 25 Students Per Batch" },
-              { icon: "📝", title: "Weekly Test" },
-              { icon: "👨‍👩‍👧", title: "Monthly Parents Meeting" },
-              { icon: "⏰", title: "Extra Study Hours" },
-            ].map((feature, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center">
-                <span className="text-4xl mb-3 block">{feature.icon}</span>
-                <h3 className="font-semibold text-gray-800">{feature.title}</h3>
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-8 items-start">
+            {/* Video on Left */}
+            <div className="flex justify-center">
+              <div className="w-full max-w-xs md:max-w-sm">
+                <YouTubePlayer
+                  url="https://youtube.com/shorts/wPM77tbr_Hg"
+                  title="Why Choose Genius"
+                  className="aspect-[9/16]"
+                />
               </div>
-            ))}
+            </div>
+            {/* Images on Right */}
+            <div className="grid grid-cols-3 gap-2 md:gap-4">
+              {[
+                {
+                  image: "/content/home_images/didgitalscreenandcctv.png",
+                  title: "Digital Class Room & Under CCTV Security",
+                },
+                { image: "/content/home_images/highqualifiedteacher.png", title: "Highly Qualified Teachers" },
+                { image: "/content/home_images/ac.png", title: "AC Class Rooms" },
+                { image: "/content/home_images/25students.png", title: "Only 25 Students Per Batch" },
+                { image: "/content/home_images/weeklytests.png", title: "Weekly Test" },
+                { image: "/content/home_images/ptm.jpg", title: "Monthly Parents Meeting" },
+                { image: "/content/home_images/extrahours.png", title: "Extra Study Hours" },
+              ].map((feature, index) => (
+                <div key={index} className="text-center flex flex-col items-center">
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 object-contain"
+                  />
+                  <h3 className="mt-2 text-sm font-semibold text-gray-800">{feature.title}</h3>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

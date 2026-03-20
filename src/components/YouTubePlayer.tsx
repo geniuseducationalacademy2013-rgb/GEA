@@ -47,13 +47,13 @@ export default function YouTubePlayer({ url, title = "Video", className = "" }: 
   const thumbnailUrl = getYouTubeThumbnail(videoId);
 
   return (
-    <div className={`relative rounded-lg overflow-hidden ${className}`}>
+    <div className={`relative rounded-lg overflow-hidden bg-black ${className}`}>
       {!isPlaying ? (
-        <div className="relative cursor-pointer" onClick={handlePlayPause}>
+        <div className="relative cursor-pointer w-full h-full" onClick={handlePlayPause}>
           <img
             src={thumbnailUrl}
             alt={title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-fill"
             onError={(e) => {
               e.currentTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
             }}

@@ -62,11 +62,11 @@ export default function MerchandisePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {notes.map((note, index) => (
               <div key={index} className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
-                <div className="aspect-[3/4] overflow-hidden bg-white">
+                <div className="overflow-hidden bg-white">
                   <img
                     src={note.image}
                     alt={note.name}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="p-6">
@@ -101,10 +101,9 @@ export default function MerchandisePage() {
                 className="w-full h-auto object-contain"
               />
             </div>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-600">
               Premium quality bags with the Genius Educational Academy logo. Available in various sizes and designs.
             </p>
-            <p className="text-primary font-semibold">Coming Soon!</p>
           </div>
         </div>
       </section>

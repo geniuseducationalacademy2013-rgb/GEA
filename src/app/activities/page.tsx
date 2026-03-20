@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import YouTubePlayer from "@/components/YouTubePlayer";
-import { ChevronDown, ChevronUp, Calendar } from "lucide-react";
+import { ChevronDown, ChevronUp, Calendar, X } from "lucide-react";
 
 interface ActivityMedia {
   id: number;
@@ -26,6 +26,7 @@ function ActivitiesPageContent() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [openActivity, setOpenActivity] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     fetchActivities();
@@ -58,6 +59,14 @@ function ActivitiesPageContent() {
 
   const toggleActivity = (name: string) => {
     setOpenActivity(openActivity === name ? null : name);
+  };
+
+  const openImage = (url: string) => {
+    setSelectedImage(url);
+  };
+
+  const closeImage = () => {
+    setSelectedImage(null);
   };
 
   const defaultActivities = [
@@ -136,7 +145,8 @@ function ActivitiesPageContent() {
                                 <img
                                   src={media.url}
                                   alt={activity.name}
-                                  className="w-full h-48 object-cover"
+                                  className="w-full h-48 object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                                  onClick={() => openImage(media.url)}
                                 />
                               )}
                             </div>
@@ -155,6 +165,27 @@ function ActivitiesPageContent() {
           )}
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          onClick={closeImage}
+        >
+          <button
+            onClick={closeImage}
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img
+            src={selectedImage}
+            alt="Activity"
+            className="max-w-[90vw] max-h-[90vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
 
       <Footer />
     </main>

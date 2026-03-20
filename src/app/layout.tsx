@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import QuickNeedsPopup from "@/components/QuickNeedsPopup";
 
 export const metadata: Metadata = {
   title: "Genius Educational Academy - Your dreams does not exist, you must create it",
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased bg-white">
         {children}
+        <QuickNeedsPopup />
       </body>
     </html>
   );

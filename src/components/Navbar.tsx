@@ -10,7 +10,8 @@ const navItems = [
   { name: "About Us", href: "/about-us", subsections: ["About Us", "Features", "Founder", "Location"] },
   { name: "Merchandise", href: "/merchandise" },
   { name: "Contact Us", href: "/contact-us" },
-  { name: "Activities", href: "/activities" },
+  { name: "Activities", href: "/activities", hasDropdown: true },
+  { name: "Gallery", href: "/gallery" },
   { name: "Results", href: "/results" },
   { name: "Admission", href: "/admission" },
 ];
@@ -19,6 +20,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [activitySubsections, setActivitySubsections] = useState<string[]>([]);
+  const [mobileActivitiesOpen, setMobileActivitiesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +29,25 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const loadActivities = async () => {
+      try {
+        const res = await fetch("/api/activities", { cache: "no-store" });
+        if (!res.ok) return;
+        const data = (await res.json()) as { activities?: { name?: string | null }[] };
+        const names = (data.activities || [])
+          .map((a) => a.name || "")
+          .map((n) => n.trim())
+          .filter((n) => n);
+        setActivitySubsections(names);
+      } catch {
+        setActivitySubsections([]);
+      }
+    };
+
+    void loadActivities();
   }, []);
 
   const handleSubsectionClick = (section: string, subsection: string) => {
@@ -55,9 +77,9 @@ export default function Navbar() {
                 e.currentTarget.style.display = 'none';
               }}
             />
-            <div className="hidden sm:block">
-              <h1 className="text-xl font-bold text-gray-800">GENIUS EDUCATIONAL ACADEMY</h1>
-              <p className="text-xs text-primary">Your dreams does not exist, you must create it.</p>
+            <div className="block">
+              <h1 className="text-sm sm:text-xl font-bold text-gray-800 leading-tight">GENIUS EDUCATIONAL ACADEMY</h1>
+              <p className="text-xs text-primary hidden sm:block">Your dreams does not exist, you must create it.</p>
             </div>
           </Link>
 
@@ -67,15 +89,15 @@ export default function Navbar() {
               <div
                 key={item.name}
                 className="relative group"
-                onMouseEnter={() => item.subsections && setOpenDropdown(item.name)}
+                onMouseEnter={() => (item.subsections || item.hasDropdown) && setOpenDropdown(item.name)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
                 <Link
                   href={item.href}
-                  className="px-4 py-2 text-gray-700 hover:text-primary font-medium transition-colors flex items-center gap-1"
+                  className="px-4 py-2 text-gray-700 hover:text-primary font-medium transition-colors flex items-center gap-1 whitespace-nowrap"
                 >
                   {item.name}
-                  {item.subsections && <ChevronDown className="w-4 h-4" />}
+                  {(item.subsections || item.hasDropdown) && <ChevronDown className="w-4 h-4" />}
                 </Link>
                 {item.subsections && openDropdown === item.name && (
                   <div className="absolute top-full left-0 w-56 bg-white shadow-lg rounded-lg py-2 animate-fadeInDown">
@@ -88,6 +110,22 @@ export default function Navbar() {
                         {sub}
                       </button>
                     ))}
+                  </div>
+                )}
+
+                {item.hasDropdown && openDropdown === item.name && (
+                  <div className="absolute top-full left-0 w-64 bg-white shadow-lg rounded-lg py-2 animate-fadeInDown max-h-80 overflow-auto">
+                    {(activitySubsections.length ? activitySubsections : []).map(
+                      (sub) => (
+                        <button
+                          key={sub}
+                          onClick={() => handleSubsectionClick(item.name, sub)}
+                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors"
+                        >
+                          {sub}
+                        </button>
+                      )
+                    )}
                   </div>
                 )}
               </div>
@@ -110,13 +148,42 @@ export default function Navbar() {
           <div className="px-4 py-4 space-y-2">
             {navItems.map((item) => (
               <div key={item.name}>
-                <Link
-                  href={item.href}
-                  onClick={() => !item.subsections && setIsOpen(false)}
-                  className="block py-2 text-gray-700 hover:text-primary font-medium"
-                >
-                  {item.name}
-                </Link>
+                {item.hasDropdown ? (
+                  <div>
+                    <button
+                      onClick={() => setMobileActivitiesOpen(!mobileActivitiesOpen)}
+                      className="flex items-center justify-between w-full py-2 text-gray-700 hover:text-primary font-medium"
+                    >
+                      {item.name}
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileActivitiesOpen ? "rotate-180" : ""}`} />
+                    </button>
+                    {mobileActivitiesOpen && (
+                      <div className="pl-4 space-y-1">
+                        {activitySubsections.map((sub) => (
+                          <button
+                            key={sub}
+                            onClick={() => {
+                              handleSubsectionClick(item.name, sub);
+                              setIsOpen(false);
+                              setMobileActivitiesOpen(false);
+                            }}
+                            className="block w-full text-left py-1 text-gray-600 hover:text-primary text-sm"
+                          >
+                            {sub}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    href={item.href}
+                    onClick={() => !item.subsections && setIsOpen(false)}
+                    className="block py-2 text-gray-700 hover:text-primary font-medium"
+                  >
+                    {item.name}
+                  </Link>
+                )}
                 {item.subsections && (
                   <div className="pl-4 space-y-1">
                     {item.subsections.map((sub) => (

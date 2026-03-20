@@ -19,6 +19,23 @@ export default function AdmissionPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const buildWhatsAppMessage = () => {
+    const lines = [
+      "Admission Form",
+      "",
+      `Name: ${formData.name}`,
+      `Phone: ${formData.contact_details}`,
+      `Standard: ${formData.standard}`,
+      `Board: ${formData.board}`,
+      formData.subject ? `Subject: ${formData.subject}` : null,
+      formData.location ? `Location: ${formData.location}` : null,
+      formData.school_name ? `School Name: ${formData.school_name}` : null,
+      formData.last_year_percentage ? `Last Year Percentage: ${formData.last_year_percentage}` : null,
+    ].filter(Boolean);
+
+    return lines.join("\n");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -32,6 +49,11 @@ export default function AdmissionPage() {
 
       if (response.ok) {
         setIsSubmitted(true);
+
+        const message = buildWhatsAppMessage();
+        const waUrl = `https://wa.me/917045332855?text=${encodeURIComponent(message)}`;
+        window.location.href = waUrl;
+
         setFormData({
           name: "",
           contact_details: "",
@@ -119,15 +141,18 @@ export default function AdmissionPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Contact Details *</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
                     <input
-                      type="text"
+                      type="tel"
                       name="contact_details"
                       value={formData.contact_details}
                       onChange={handleChange}
                       required
+                      pattern="[0-9]{10}"
+                      maxLength={10}
                       className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors"
-                      placeholder="Phone / Email"
+                      placeholder="Enter Phone Number"
+                      title="Please enter a valid 10-digit phone number"
                     />
                   </div>
                 </div>
@@ -179,16 +204,14 @@ export default function AdmissionPage() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
-                    <select
+                    <input
+                      type="text"
                       name="location"
                       value={formData.location}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors"
-                    >
-                      <option value="">Select Branch</option>
-                      <option value="Kamothe - Branch 1">Kamothe - Branch 1 (Tulsi Avenue)</option>
-                      <option value="Kamothe - Branch 2">Kamothe - Branch 2 (Sai Pooja CHS)</option>
-                    </select>
+                      placeholder="Enter your location"
+                    />
                   </div>
                 </div>
 

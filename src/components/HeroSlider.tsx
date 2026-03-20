@@ -15,10 +15,10 @@ const slides = [
   {
     image: "/content/hero_image/hero2.jpg",
     alt: "Genius Educational Academy - Hero 2",
-    frameHeightClass: "h-[60vh] md:h-[75vh]",
+    frameHeightClass: "h-full",
     objectFitClass: "object-contain",
     objectPositionClass: "object-center",
-    wrapperClass: "items-center justify-center pt-8 pb-8 md:pt-12 md:pb-12",
+    wrapperClass: "items-center justify-center",
   },
 ];
 

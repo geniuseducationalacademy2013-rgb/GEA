@@ -49,16 +49,18 @@ function AboutUsPageContent() {
       {/* About Us Section */}
       <section id="about-us" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div className="order-1 md:order-none md:col-start-2 md:row-start-1">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 text-center md:text-left">Our Story</h2>
+            </div>
+            <div className="order-2 md:order-none md:col-start-1 md:row-span-2 md:mt-12">
               <img
                 src="/content/about_us_image/lifecycle_of_geniusClasses.jpeg"
                 alt="Lifecycle of Genius Classes"
                 className="w-full rounded-xl shadow-lg"
               />
             </div>
-            <div className="order-1 md:order-2">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Our Story</h2>
+            <div className="order-3 md:order-none md:col-start-2 md:row-start-2">
               <div className="space-y-4 text-gray-600">
                 <p>
                   <strong className="text-gray-800">Genius Educational Academy</strong> was officially established in 2013, 
@@ -166,7 +168,7 @@ function AboutUsPageContent() {
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
               <div className="h-64 bg-gray-200">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.5!2d73.1!3d19.03!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAxJzQ4LjAiTiA3M8KwMDYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235.7499187048695!2d73.0858356355161!3d19.01977898276174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c278e9e9e6a3%3A0xf1f77aef30a37439!2sTulsi%20Avenue%2C%20Sector%2034%2C%20Kamothe%2C%20Panvel%2C%20Maharashtra%20410209!5e0!3m2!1sen!2sin!4v1774010214370!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -178,7 +180,7 @@ function AboutUsPageContent() {
               <div className="p-6">
                 <h3 className="font-semibold text-lg text-gray-800 mb-2 flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-primary" />
-                  Address 1
+                  Branch 1
                 </h3>
                 <p className="text-gray-600">
                   Shop No.1, Tulsi Avenue, Plot No.68, Sector-34, Kamothe, Navi Mumbai - 410209
@@ -190,7 +192,7 @@ function AboutUsPageContent() {
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
               <div className="h-64 bg-gray-200">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.5!2d73.1!3d19.03!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAxJzQ4LjAiTiA3M8KwMDYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!3m2!1sen!2sin!4v1774010416008!5m2!1sen!2sin!6m8!1m7!1s243ODjCtOhOGgq8HVsxp9A!2m2!1d19.01964448220203!2d73.08568901958613!3f287.4881128530729!4f10.831800650006059!5f0.7820865974627469"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -202,7 +204,7 @@ function AboutUsPageContent() {
               <div className="p-6">
                 <h3 className="font-semibold text-lg text-gray-800 mb-2 flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-primary" />
-                  Address 2
+                  Branch 2
                 </h3>
                 <p className="text-gray-600">
                   Shop No.5, Sai Pooja CHS, Plot No.36, Sector-34, Kamothe, Navi Mumbai - 410209

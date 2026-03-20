@@ -17,6 +17,21 @@ export default function ContactUsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const buildWhatsAppMessage = () => {
+    const lines = [
+      "Contact Us Inquiry",
+      "",
+      `Name: ${formData.name}`,
+      `Phone: ${formData.contact_details}`,
+      formData.subject ? `Subject: ${formData.subject}` : null,
+      formData.standard ? `Standard: ${formData.standard}` : null,
+      formData.board ? `Board: ${formData.board}` : null,
+      formData.query ? `Query: ${formData.query}` : null,
+    ].filter(Boolean);
+
+    return lines.join("\n");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -30,6 +45,11 @@ export default function ContactUsPage() {
 
       if (response.ok) {
         setIsSubmitted(true);
+
+        const message = buildWhatsAppMessage();
+        const waUrl = `https://wa.me/917045332855?text=${encodeURIComponent(message)}`;
+        window.location.href = waUrl;
+
         setFormData({
           name: "",
           contact_details: "",
@@ -167,15 +187,18 @@ export default function ContactUsPage() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Contact Details *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
                         <input
-                          type="text"
+                          type="tel"
                           name="contact_details"
                           value={formData.contact_details}
                           onChange={handleChange}
                           required
+                          pattern="[0-9]{10}"
+                          maxLength={10}
                           className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors"
-                          placeholder="Phone / Email"
+                          placeholder="Enter Phone Number"
+                          title="Please enter a valid 10-digit phone number"
                         />
                       </div>
                     </div>
