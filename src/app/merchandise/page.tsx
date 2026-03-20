@@ -120,14 +120,14 @@ export default function MerchandisePage() {
           </div>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1">
+            <div>
               <img
                 src="/content/Merchandise/uniform_image.png"
                 alt="Genius Educational Academy Uniform"
                 className="w-full rounded-xl shadow-lg"
               />
             </div>
-            <div className="order-1 md:order-2">
+            <div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4">Smart & Professional</h3>
               <p className="text-gray-600 mb-4">
                 Our personalized uniforms are designed to create a sense of belonging and professionalism among students. 

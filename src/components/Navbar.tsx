@@ -79,7 +79,7 @@ export default function Navbar() {
             />
             <div className="block">
               <h1 className="text-sm sm:text-xl font-bold text-gray-800 leading-tight">GENIUS EDUCATIONAL ACADEMY</h1>
-              <p className="text-xs text-primary hidden sm:block">Your dreams does not exist, you must create it.</p>
+              <p className="text-[10px] sm:text-xs text-primary leading-tight">Your dreams does not exist, you must create it.</p>
             </div>
           </Link>
 

@@ -47,13 +47,13 @@ function AboutUsPageContent() {
       </section>
 
       {/* About Us Section */}
-      <section id="about-us" className="py-16 bg-white">
+      <section id="about-us" className="pt-16 pb-8 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="grid md:grid-cols-2 gap-4 md:gap-12 items-start">
             <div className="order-1 md:order-none md:col-start-2 md:row-start-1">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 text-center md:text-left">Our Story</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-0 md:mb-2 text-center md:text-left">Our Story</h2>
             </div>
-            <div className="order-2 md:order-none md:col-start-1 md:row-span-2 md:mt-12">
+            <div className="order-2 md:order-none md:col-start-1 md:row-span-2">
               <img
                 src="/content/about_us_image/lifecycle_of_geniusClasses.jpeg"
                 alt="Lifecycle of Genius Classes"
@@ -168,7 +168,7 @@ function AboutUsPageContent() {
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
               <div className="h-64 bg-gray-200">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235.7499187048695!2d73.0858356355161!3d19.01977898276174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c278e9e9e6a3%3A0xf1f77aef30a37439!2sTulsi%20Avenue%2C%20Sector%2034%2C%20Kamothe%2C%20Panvel%2C%20Maharashtra%20410209!5e0!3m2!1sen!2sin!4v1774010214370!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!4v1774020523502!6m8!1m7!1sV-0giRSMHgFTB8-d9VsxYw!2m2!1d19.01982812865764!2d73.08573350870496!3f8.885364177030928!4f2.589179967352763!5f1.4785999421676932"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
