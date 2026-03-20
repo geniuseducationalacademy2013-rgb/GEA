@@ -51,7 +51,7 @@ export default function AdmissionPage() {
         setIsSubmitted(true);
 
         const message = buildWhatsAppMessage();
-        const waUrl = `https://wa.me/917045332855?text=${encodeURIComponent(message)}`;
+        const waUrl = `https://wa.me/919833638475?text=${encodeURIComponent(message)}`;
         window.location.href = waUrl;
 
         setFormData({
