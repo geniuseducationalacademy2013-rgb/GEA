@@ -82,10 +82,10 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-primary/5">
+      <section className="py-12 md:py-16 bg-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-12">Why Choose Us?</h2>
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-8 items-start">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-8 md:mb-12">Why Choose Us?</h2>
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-start">
             {/* Video on Left */}
             <div className="flex justify-center">
               <div className="w-full max-w-xs md:max-w-sm">
@@ -97,7 +97,7 @@ export default function Home() {
               </div>
             </div>
             {/* Images on Right */}
-            <div className="grid grid-cols-3 gap-2 md:gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
               {[
                 {
                   image: "/content/home_images/didgitalscreenandcctv.png",
@@ -114,9 +114,9 @@ export default function Home() {
                   <img
                     src={feature.image}
                     alt={feature.title}
-                    className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 object-contain"
+                    className="w-16 h-16 sm:w-24 sm:h-24 md:w-36 md:h-36 object-contain"
                   />
-                  <h3 className="mt-2 text-sm font-semibold text-gray-800">{feature.title}</h3>
+                  <h3 className="mt-2 text-[11px] sm:text-sm font-semibold text-gray-800 leading-tight">{feature.title}</h3>
                 </div>
               ))}
             </div>
