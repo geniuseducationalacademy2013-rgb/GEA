@@ -1,0 +1,143 @@
+"use client";
+
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about-us", subsections: ["About Us", "Features", "Founder", "Location"] },
+  { name: "Merchandise", href: "/merchandise" },
+  { name: "Contact Us", href: "/contact-us" },
+  { name: "Activities", href: "/activities" },
+  { name: "Results", href: "/results" },
+  { name: "Admission", href: "/admission" },
+];
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleSubsectionClick = (section: string, subsection: string) => {
+    if (section === "About Us") {
+      window.location.href = `/about-us?section=${encodeURIComponent(subsection)}`;
+    } else if (section === "Activities") {
+      window.location.href = `/activities?activity=${encodeURIComponent(subsection)}`;
+    }
+    setOpenDropdown(null);
+  };
+
+  return (
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled ? "bg-white shadow-lg" : "bg-white/95"
+      )}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          <Link href="/" className="flex items-center gap-3">
+            <img
+              src="/content/logo/geniuslogo.png"
+              alt="Genius Educational Academy Logo"
+              className="h-14 w-auto object-contain"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+            <div className="hidden sm:block">
+              <h1 className="text-xl font-bold text-gray-800">GENIUS EDUCATIONAL ACADEMY</h1>
+              <p className="text-xs text-primary">Your dreams does not exist, you must create it.</p>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <div
+                key={item.name}
+                className="relative group"
+                onMouseEnter={() => item.subsections && setOpenDropdown(item.name)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                <Link
+                  href={item.href}
+                  className="px-4 py-2 text-gray-700 hover:text-primary font-medium transition-colors flex items-center gap-1"
+                >
+                  {item.name}
+                  {item.subsections && <ChevronDown className="w-4 h-4" />}
+                </Link>
+                {item.subsections && openDropdown === item.name && (
+                  <div className="absolute top-full left-0 w-56 bg-white shadow-lg rounded-lg py-2 animate-fadeInDown">
+                    {item.subsections.map((sub) => (
+                      <button
+                        key={sub}
+                        onClick={() => handleSubsectionClick(item.name, sub)}
+                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors"
+                      >
+                        {sub}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden p-2 text-gray-700 hover:text-primary"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="lg:hidden bg-white shadow-lg">
+          <div className="px-4 py-4 space-y-2">
+            {navItems.map((item) => (
+              <div key={item.name}>
+                <Link
+                  href={item.href}
+                  onClick={() => !item.subsections && setIsOpen(false)}
+                  className="block py-2 text-gray-700 hover:text-primary font-medium"
+                >
+                  {item.name}
+                </Link>
+                {item.subsections && (
+                  <div className="pl-4 space-y-1">
+                    {item.subsections.map((sub) => (
+                      <button
+                        key={sub}
+                        onClick={() => {
+                          handleSubsectionClick(item.name, sub);
+                          setIsOpen(false);
+                        }}
+                        className="block w-full text-left py-1 text-gray-600 hover:text-primary text-sm"
+                      >
+                        {sub}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+}
