@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -17,7 +17,7 @@ const features = [
   { icon: Clock, title: "Extra Study Hours", description: "Additional time for doubt clearing" },
 ];
 
-export default function AboutUsPage() {
+function AboutUsPageContent() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -215,5 +215,13 @@ export default function AboutUsPage() {
 
       <Footer />
     </main>
+  );
+}
+
+export default function AboutUsPage() {
+  return (
+    <Suspense>
+      <AboutUsPageContent />
+    </Suspense>
   );
 }

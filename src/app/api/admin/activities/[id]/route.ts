@@ -4,18 +4,20 @@ import { query } from '@/lib/db';
 // PUT - Update activity
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await request.json();
     const { name, description } = body;
+
+    const { id } = await params;
 
     const result = await query(`
       UPDATE activities
       SET name = $1, description = $2
       WHERE id = $3
       RETURNING id, name, description
-    `, [name, description, params.id]);
+    `, [name, description, id]);
 
     return NextResponse.json({ success: true, activity: result.rows[0] });
   } catch (error) {
@@ -27,10 +29,11 @@ export async function PUT(
 // DELETE - Delete activity
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await query('DELETE FROM activities WHERE id = $1', [params.id]);
+    const { id } = await params;
+    await query('DELETE FROM activities WHERE id = $1', [id]);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting activity:', error);

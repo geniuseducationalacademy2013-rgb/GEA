@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -21,7 +21,7 @@ interface Activity {
   media: ActivityMedia[];
 }
 
-export default function ActivitiesPage() {
+function ActivitiesPageContent() {
   const searchParams = useSearchParams();
   const [activities, setActivities] = useState<Activity[]>([]);
   const [openActivity, setOpenActivity] = useState<string | null>(null);
@@ -158,5 +158,13 @@ export default function ActivitiesPage() {
 
       <Footer />
     </main>
+  );
+}
+
+export default function ActivitiesPage() {
+  return (
+    <Suspense>
+      <ActivitiesPageContent />
+    </Suspense>
   );
 }

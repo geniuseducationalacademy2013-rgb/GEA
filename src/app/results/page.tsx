@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Trophy, Award, Star } from "lucide-react";
@@ -14,20 +17,33 @@ const defaultResults = [
   },
 ];
 
-export default async function ResultsPage() {
-  let results = defaultResults;
-  
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/results`, {
-      cache: 'no-store'
-    });
-    const data = await response.json();
-    if (data.results && data.results.length > 0) {
-      results = data.results;
-    }
-  } catch (error) {
-    console.error("Error fetching results:", error);
-  }
+type Result = {
+  id: number;
+  student_name: string;
+  percentage: string;
+  year: string;
+  description: string | null;
+  image_url: string | null;
+};
+
+export default function ResultsPage() {
+  const [results, setResults] = useState<Result[]>(defaultResults);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const response = await fetch("/api/results", { cache: "no-store" });
+        const data = (await response.json()) as { results?: Result[] };
+        if (data.results && data.results.length > 0) {
+          setResults(data.results);
+        }
+      } catch (error) {
+        console.error("Error fetching results:", error);
+      }
+    };
+
+    void load();
+  }, []);
 
   return (
     <main>

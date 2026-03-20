@@ -4,10 +4,11 @@ import { query } from '@/lib/db';
 // DELETE - Delete media
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await query('DELETE FROM activity_media WHERE id = $1', [params.id]);
+    const { id } = await params;
+    await query('DELETE FROM activity_media WHERE id = $1', [id]);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting media:', error);

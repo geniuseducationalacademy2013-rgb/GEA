@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Edit, Trash2, Image, Video, Save, X } from "lucide-react";
+import { Plus, Edit, Trash2, Image, Video, Save, X, Activity as ActivityIcon } from "lucide-react";
 
 interface ActivityMedia {
   id: number;
@@ -340,7 +340,7 @@ export default function AdminActivitiesPage() {
 
           {activities.length === 0 && (
             <div className="text-center py-12 bg-white rounded-xl">
-              <Activity className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+              <ActivityIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500">No activities yet. Add your first activity!</p>
             </div>
           )}
