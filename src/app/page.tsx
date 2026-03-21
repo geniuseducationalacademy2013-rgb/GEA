@@ -93,6 +93,7 @@ export default function Home() {
                 url="https://youtube.com/shorts/wPM77tbr_Hg"
                 title="Why Choose Genius"
                 className="aspect-[9/16] rounded-lg overflow-hidden shadow-lg"
+                modal={true}
               />
             </div>
 
