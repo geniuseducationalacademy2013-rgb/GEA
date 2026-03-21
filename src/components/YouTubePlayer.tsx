@@ -121,18 +121,18 @@ export default function YouTubePlayer({ url, title = "Video", className = "", mo
 
       {/* Video Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90" onClick={handleCloseModal}>
-          <div className="relative w-full max-w-4xl mx-4" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 overflow-y-auto" onClick={handleCloseModal}>
+          <div className="relative w-full max-w-lg md:max-w-2xl lg:max-w-4xl" onClick={(e) => e.stopPropagation()}>
             {/* Close Button */}
             <button
               onClick={handleCloseModal}
-              className="absolute -top-12 right-0 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors shadow-lg z-10"
+              className="absolute -top-10 right-0 w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors shadow-lg z-10"
             >
-              <X className="w-6 h-6 text-gray-800" />
+              <X className="w-5 h-5 text-gray-800" />
             </button>
             
             {/* Video Container */}
-            <div className="relative aspect-[9/16] sm:aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+            <div className="relative aspect-[9/16] sm:aspect-video bg-black rounded-lg overflow-hidden shadow-2xl max-h-[80vh] lg:max-h-[85vh]">
               <iframe
                 ref={iframeRef}
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1&rel=0`}
@@ -145,12 +145,12 @@ export default function YouTubePlayer({ url, title = "Video", className = "", mo
               {/* Play/Pause Button */}
               <button
                 onClick={handlePlayPause}
-                className="absolute bottom-4 right-4 w-12 h-12 bg-primary rounded-full flex items-center justify-center hover:bg-primary-500 transition-colors shadow-lg z-10"
+                className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center hover:bg-primary-500 transition-colors shadow-lg z-10"
               >
                 {isPaused ? (
-                  <Play className="w-6 h-6 text-white ml-0.5" />
+                  <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white ml-0.5" />
                 ) : (
-                  <Pause className="w-6 h-6 text-white" />
+                  <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 )}
               </button>
             </div>

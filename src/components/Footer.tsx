@@ -82,6 +82,26 @@ export default function Footer() {
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} Genius Educational Academy. All rights reserved.
           </p>
+          <p className="text-gray-500 text-xs mt-2">
+            Developed by{" "}
+            <a 
+              href="https://www.shridevfreelance.online/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-green-400 hover:text-green-300 transition-colors font-medium"
+            >
+              ShriDev Freelance
+            </a>
+            {" "}-{" "}
+            <a 
+              href="https://www.shridevfreelance.online/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-primary transition-colors"
+            >
+              https://www.shridevfreelance.online/
+            </a>
+          </p>
         </div>
       </div>
     </footer>
