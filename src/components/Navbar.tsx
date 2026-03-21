@@ -15,6 +15,7 @@ const navItems = [
   { name: "Contact Us", href: "/contact-us" },
   { name: "Activities", href: "/activities", hasDropdown: true },
   { name: "Gallery", href: "/gallery" },
+  { name: "Students Feedback", href: "/students-feedback" },
   { name: "Results", href: "/results" },
   { name: "Admission", href: "/admission" },
 ];
