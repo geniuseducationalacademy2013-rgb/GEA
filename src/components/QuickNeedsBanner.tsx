@@ -29,15 +29,15 @@ export default function QuickNeedsBanner() {
   if (!tagline) return null;
 
   return (
-    <div className="bg-red-600 py-2 overflow-hidden">
+    <div className="bg-blue-900 py-2 overflow-hidden">
       <div className={"animate-marquee whitespace-nowrap " + oswald.className}>
         {[0, 1, 2, 3].map((i) => (
           <span
             key={i}
-            className="mx-8 font-semibold text-yellow-200"
+            className="mx-8 font-semibold text-white"
             style={{
               textShadow:
-                "0 0 8px rgba(255, 255, 255, 0.55), 0 0 18px rgba(253, 224, 71, 0.65), 0 0 28px rgba(253, 224, 71, 0.45)",
+                "0 0 8px rgba(255, 255, 255, 0.55), 0 0 18px rgba(255, 255, 255, 0.65), 0 0 28px rgba(255, 255, 255, 0.45)",
             }}
           >
             {tagline}

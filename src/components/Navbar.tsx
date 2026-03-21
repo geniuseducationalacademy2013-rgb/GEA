@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Oswald } from "next/font/google";
+
+const oswald = Oswald({ subsets: ["latin"], weight: ["500", "600", "700"] });
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -66,25 +69,25 @@ export default function Navbar() {
         scrolled ? "bg-white shadow-lg" : "bg-white/95"
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-0">
         <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 lg:ml-8">
             <img
               src="/content/logo/geniuslogo.png"
               alt="Genius Educational Academy Logo"
-              className="h-14 w-auto object-contain"
+              className="h-14 w-auto object-contain drop-shadow-[0_4px_6px_rgba(0,0,0,0.3)]"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
             />
             <div className="block">
-              <h1 className="text-sm sm:text-xl font-bold text-gray-800 leading-tight">GENIUS EDUCATIONAL ACADEMY</h1>
-              <p className="text-[10px] sm:text-xs text-primary leading-tight">Your dreams does not exist, you must create it.</p>
+              <h1 className={"text-sm sm:text-xl font-bold text-gray-800 leading-tight tracking-wide drop-shadow-[0_3px_4px_rgba(0,0,0,0.35)] " + oswald.className}>GENIUS EDUCATIONAL ACADEMY</h1>
+              <p className="text-[10px] sm:text-xs text-primary leading-tight font-bold">Your dreams does not exist, you must create it.</p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
+          <div className="hidden lg:flex items-center space-x-1 lg:mr-8">
             {navItems.map((item) => (
               <div
                 key={item.name}
