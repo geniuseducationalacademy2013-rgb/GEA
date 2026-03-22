@@ -13,15 +13,18 @@ export const query = db.query;
 
 // Database schema initialization
 export async function initDatabase() {
+  // Activities table with sort_order
   await db.query(`
     CREATE TABLE IF NOT EXISTS activities (
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       description TEXT,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      sort_order INTEGER DEFAULT 0
     )
   `);
 
+  // Activity media with sort_order
   await db.query(`
     CREATE TABLE IF NOT EXISTS activity_media (
       id SERIAL PRIMARY KEY,
@@ -29,10 +32,12 @@ export async function initDatabase() {
       type VARCHAR(50) NOT NULL,
       url TEXT NOT NULL,
       thumbnail_url TEXT,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      sort_order INTEGER DEFAULT 0
     )
   `);
 
+  // Results table
   await db.query(`
     CREATE TABLE IF NOT EXISTS results (
       id SERIAL PRIMARY KEY,
@@ -41,6 +46,54 @@ export async function initDatabase() {
       year VARCHAR(10),
       description TEXT,
       image_url TEXT,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  // Result images with sort_order
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS result_images (
+      id SERIAL PRIMARY KEY,
+      result_id INTEGER REFERENCES results(id) ON DELETE CASCADE,
+      url TEXT NOT NULL,
+      sort_order INTEGER DEFAULT 0
+    )
+  `);
+
+  // Gallery with sort_order
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS gallery (
+      id SERIAL PRIMARY KEY,
+      type VARCHAR(50) NOT NULL,
+      url TEXT NOT NULL,
+      thumbnail TEXT,
+      sort_order INTEGER DEFAULT 0
+    )
+  `);
+
+  // Student feedback with sort_order
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS student_feedback (
+      id SERIAL PRIMARY KEY,
+      student_name VARCHAR(255) NOT NULL,
+      feedback TEXT NOT NULL,
+      media_type VARCHAR(50) NOT NULL,
+      media_url TEXT NOT NULL,
+      thumbnail_url TEXT,
+      sort_order INTEGER DEFAULT 0
+    )
+  `);
+
+  // Quick needs
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS quick_needs (
+      id SERIAL PRIMARY KEY,
+      type VARCHAR(50) NOT NULL,
+      content TEXT,
+      media_url TEXT,
+      start_date DATE NOT NULL,
+      end_date DATE NOT NULL,
+      is_active BOOLEAN DEFAULT true,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `);
@@ -72,6 +125,10 @@ export async function initDatabase() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `);
+
+  // Add sort_order columns if they don't exist (for existing tables)
+  await db.query(`ALTER TABLE activities ADD COLUMN IF NOT EXISTS sort_order INTEGER DEFAULT 0`);
+  await db.query(`ALTER TABLE activity_media ADD COLUMN IF NOT EXISTS sort_order INTEGER DEFAULT 0`);
 }
 
 export default pool;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { X, Play } from "lucide-react";
 import YouTubePlayer from "./YouTubePlayer";
 
@@ -10,10 +11,17 @@ type PopupData = {
 };
 
 export default function QuickNeedsPopup() {
+  const pathname = usePathname();
   const [popup, setPopup] = useState<PopupData | null>(null);
   const [visible, setVisible] = useState(false);
 
+  // Don't show popup on admin pages
+  const isAdminPage = pathname?.startsWith("/genius/admin");
+
   useEffect(() => {
+    // Skip loading on admin pages
+    if (isAdminPage) return;
+
     const load = async () => {
       try {
         const res = await fetch("/api/quick-needs", { cache: "no-store" });
@@ -29,7 +37,7 @@ export default function QuickNeedsPopup() {
       }
     };
     void load();
-  }, []);
+  }, [isAdminPage]);
 
   const closePopup = () => {
     setVisible(false);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Oswald } from "next/font/google";
 
 const oswald = Oswald({ subsets: ["latin"], weight: ["500", "600", "700"] });
@@ -11,9 +12,16 @@ type QuickNeedsData = {
 };
 
 export default function QuickNeedsBanner() {
+  const pathname = usePathname();
   const [tagline, setTagline] = useState<string | null>(null);
 
+  // Don't show banner on admin pages
+  const isAdminPage = pathname?.startsWith("/genius/admin");
+
   useEffect(() => {
+    // Skip loading on admin pages
+    if (isAdminPage) return;
+
     const load = async () => {
       try {
         const res = await fetch("/api/quick-needs", { cache: "no-store" });
@@ -24,7 +32,7 @@ export default function QuickNeedsBanner() {
       }
     };
     void load();
-  }, []);
+  }, [isAdminPage]);
 
   if (!tagline) return null;
 

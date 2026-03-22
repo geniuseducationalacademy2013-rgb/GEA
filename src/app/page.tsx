@@ -18,17 +18,18 @@ export default function Home() {
       </div>
 
       {/* Class Moments Video Section */}
-      <section className="pt-8 pb-16 bg-gray-50">
+      <section className="pt-8 pb-16 bg-[#0b5394]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Class Moments</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">Experience the vibrant atmosphere of Genius Educational Academy</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Discover About Us</h2>
+            <p className="text-white/80 max-w-2xl mx-auto">Discover what makes Genius Educational Academy special</p>
           </div>
           <div className="max-w-4xl mx-auto">
             <YouTubePlayer
-              url="https://youtu.be/jzHvX4bTPNk"
-              title="Class Moments"
+              url="https://youtube.com/shorts/wPM77tbr_Hg"
+              title="Discover About Us"
               className="aspect-video"
+              modal={true}
             />
           </div>
         </div>
@@ -86,15 +87,25 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-8 md:mb-12">Why Choose Us?</h2>
           
-          <div className="flex flex-row items-center gap-4 sm:gap-6 lg:gap-12">
-            {/* Left Side - Video */}
-            <div className="w-28 sm:w-40 md:w-48 lg:w-64 flex-shrink-0">
-              <YouTubePlayer
-                url="https://youtube.com/shorts/wPM77tbr_Hg"
-                title="Why Choose Genius"
-                className="aspect-[9/16] rounded-lg overflow-hidden shadow-lg"
-                modal={true}
-              />
+          <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
+            {/* Left Side - Two Videos */}
+            <div className="flex flex-row gap-4 lg:gap-6 flex-shrink-0">
+              <div className="w-40 sm:w-48 md:w-56 lg:w-64">
+                <YouTubePlayer
+                  url="https://youtube.com/shorts/Ln3m2uSIYTs"
+                  title="Why Choose Us Video 1"
+                  className="aspect-[9/16] rounded-lg overflow-hidden shadow-lg"
+                  modal={true}
+                />
+              </div>
+              <div className="w-40 sm:w-48 md:w-56 lg:w-64">
+                <YouTubePlayer
+                  url="https://youtube.com/shorts/5eKqehuLVe4"
+                  title="Why Choose Us Video 2"
+                  className="aspect-[9/16] rounded-lg overflow-hidden shadow-lg"
+                  modal={true}
+                />
+              </div>
             </div>
 
             {/* Right Side - All Images */}

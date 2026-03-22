@@ -1,53 +1,62 @@
-import { NextResponse } from 'next/server';
-import { query } from '@/lib/db';
+import { NextResponse } from "next/server";
+import { query } from "@/lib/db";
 
-// GET - Fetch all activities with media
+export const runtime = "nodejs";
+
 export async function GET() {
   try {
-    const activitiesResult = await query(`
-      SELECT a.id, a.name, a.description, a.sort_order
-      FROM activities a
-      ORDER BY a.sort_order ASC, a.id ASC
-    `);
-
-    const activities = await Promise.all(
-      activitiesResult.rows.map(async (activity) => {
-        const mediaResult = await query(`
-          SELECT id, type, url, thumbnail_url, sort_order
-          FROM activity_media
-          WHERE activity_id = $1
-          ORDER BY sort_order ASC, id ASC
-        `, [activity.id]);
-
-        return {
-          ...activity,
-          media: mediaResult.rows
-        };
-      })
+    const activities = await query(
+      "SELECT id, name, description, created_at, sort_order FROM activities ORDER BY sort_order ASC, id ASC"
     );
 
-    return NextResponse.json({ activities });
-  } catch (error) {
-    console.error('Error fetching activities:', error);
-    return NextResponse.json({ activities: [] }, { status: 500 });
+    const media = await query(
+      "SELECT id, activity_id, type, url, thumbnail_url, sort_order FROM activity_media ORDER BY activity_id ASC, sort_order ASC, id ASC"
+    );
+
+    const mediaByActivity = new Map<
+      number,
+      { id: number; type: string; url: string; thumbnail_url: string | null; sort_order: number }[]
+    >();
+    for (const m of media.rows as any[]) {
+      const arr = mediaByActivity.get(m.activity_id) || [];
+      arr.push({ id: m.id, type: m.type, url: m.url, thumbnail_url: m.thumbnail_url, sort_order: m.sort_order });
+      mediaByActivity.set(m.activity_id, arr);
+    }
+
+    const payload = (activities.rows as any[]).map((a) => ({
+      ...a,
+      media: mediaByActivity.get(a.id) || [],
+    }));
+
+    return NextResponse.json(payload);
+  } catch {
+    return NextResponse.json([], { status: 200 });
   }
 }
 
-// POST - Create new activity
-export async function POST(request: Request) {
+export async function POST(req: Request) {
+  const body = (await req.json().catch(() => null)) as { name?: string; description?: string | null } | null;
+
+  const name = body?.name?.trim();
+  const description = body?.description?.trim() || null;
+
+  if (!name) {
+    return NextResponse.json({ error: "Name is required" }, { status: 400 });
+  }
+
   try {
-    const body = await request.json();
-    const { name, description } = body;
+    const maxOrder = await query(
+      "SELECT COALESCE(MAX(sort_order), 0) as max FROM activities"
+    );
+    const nextOrder = ((maxOrder.rows as any[])[0]?.max ?? 0) + 1;
 
-    const result = await query(`
-      INSERT INTO activities (name, description)
-      VALUES ($1, $2)
-      RETURNING id, name, description
-    `, [name, description || null]);
+    const res = await query(
+      "INSERT INTO activities (name, description, sort_order) VALUES ($1, $2, $3) RETURNING id",
+      [name, description, nextOrder]
+    );
 
-    return NextResponse.json({ success: true, activity: result.rows[0] });
-  } catch (error) {
-    console.error('Error creating activity:', error);
-    return NextResponse.json({ success: false }, { status: 500 });
+    return NextResponse.json({ id: (res.rows as any[])[0]?.id });
+  } catch {
+    return NextResponse.json({ error: "Failed to create activity" }, { status: 500 });
   }
 }

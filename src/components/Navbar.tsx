@@ -4,9 +4,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Oswald } from "next/font/google";
-
-const oswald = Oswald({ subsets: ["latin"], weight: ["500", "600", "700"] });
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -67,23 +64,23 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "bg-white shadow-lg" : "bg-white/95"
+        scrolled ? "bg-white shadow-lg" : "bg-white"
       )}
     >
       <div className="w-full px-4 sm:px-6 lg:px-0">
         <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center gap-3 lg:ml-8">
+          <Link href="/" className="flex items-center gap-1 sm:gap-2 lg:gap-3 lg:ml-8 overflow-hidden">
             <img
               src="/content/logo/geniuslogo.png"
               alt="Genius Educational Academy Logo"
-              className="h-14 w-auto object-contain drop-shadow-[0_4px_6px_rgba(0,0,0,0.3)]"
+              className="h-10 sm:h-12 lg:h-14 w-auto object-contain drop-shadow-[0_4px_6px_rgba(0,0,0,0.3)] flex-shrink-0"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
             />
-            <div className="block">
-              <h1 className={"text-sm sm:text-xl font-bold text-gray-800 leading-tight tracking-wide drop-shadow-[0_3px_4px_rgba(0,0,0,0.35)] " + oswald.className}>GENIUS EDUCATIONAL ACADEMY</h1>
-              <p className="text-[10px] sm:text-xs text-primary leading-tight font-bold">Your dreams does not exist, you must create it.</p>
+            <div className="block overflow-hidden">
+              <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-cooper-black text-[#0b5394] leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(11,83,148,0.3)] uppercase whitespace-nowrap">GENIUS EDUCATIONAL ACADEMY</h1>
+              <p className="text-[9px] sm:text-xs text-primary leading-tight font-bold whitespace-nowrap">Your dreams does not exist, you must create it.</p>
             </div>
           </Link>
 
@@ -98,7 +95,7 @@ export default function Navbar() {
               >
                 <Link
                   href={item.href}
-                  className="px-4 py-2 text-gray-700 hover:text-primary font-medium transition-colors flex items-center gap-1 whitespace-nowrap"
+                  className="px-4 py-2 text-[#0b5394] hover:text-primary font-medium transition-colors flex items-center gap-1 whitespace-nowrap"
                 >
                   {item.name}
                   {(item.subsections || item.hasDropdown) && <ChevronDown className="w-4 h-4" />}
@@ -139,7 +136,7 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-gray-700 hover:text-primary"
+            className="lg:hidden p-2 text-[#0b5394] hover:text-primary"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -156,7 +153,7 @@ export default function Navbar() {
                   <div>
                     <button
                       onClick={() => setMobileActivitiesOpen(!mobileActivitiesOpen)}
-                      className="flex items-center justify-between w-full py-2 text-gray-700 hover:text-primary font-medium"
+                      className="flex items-center justify-between w-full py-2 text-[#0b5394] hover:text-primary font-medium"
                     >
                       {item.name}
                       <ChevronDown className={`w-4 h-4 transition-transform ${mobileActivitiesOpen ? "rotate-180" : ""}`} />
@@ -171,7 +168,7 @@ export default function Navbar() {
                               setIsOpen(false);
                               setMobileActivitiesOpen(false);
                             }}
-                            className="block w-full text-left py-1 text-gray-600 hover:text-primary text-sm"
+                            className="block w-full text-left py-1 text-[#0b5394]/80 hover:text-primary text-sm"
                           >
                             {sub}
                           </button>
@@ -183,7 +180,7 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     onClick={() => !item.subsections && setIsOpen(false)}
-                    className="block py-2 text-gray-700 hover:text-primary font-medium"
+                    className="block py-2 text-[#0b5394] hover:text-primary font-medium"
                   >
                     {item.name}
                   </Link>
@@ -197,7 +194,7 @@ export default function Navbar() {
                           handleSubsectionClick(item.name, sub);
                           setIsOpen(false);
                         }}
-                        className="block w-full text-left py-1 text-gray-600 hover:text-primary text-sm"
+                        className="block w-full text-left py-1 text-[#0b5394]/80 hover:text-primary text-sm"
                       >
                         {sub}
                       </button>
