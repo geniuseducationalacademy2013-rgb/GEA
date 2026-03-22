@@ -79,7 +79,7 @@ export default function Navbar() {
               }}
             />
             <div className="block min-w-0">
-              <h1 className="text-[0.72rem] sm:text-[clamp(0.72rem,1.35vw,1.15rem)] font-cooper-black font-black text-[#0b5394] leading-tight tracking-normal sm:tracking-wide drop-shadow-[0_2px_8px_rgba(11,83,148,0.3)] uppercase whitespace-nowrap [-webkit-text-stroke:0.75px_#0b5394] [text-shadow:0.6px_0_0_#0b5394,-0.6px_0_0_#0b5394,0_0.6px_0_#0b5394,0_-0.6px_0_#0b5394]">GENIUS EDUCATIONAL ACADEMY</h1>
+              <h1 className="text-[0.82rem] sm:text-[clamp(0.72rem,1.35vw,1.15rem)] font-cooper-black font-black text-[#0b5394] leading-tight tracking-normal sm:tracking-wide drop-shadow-[0_2px_8px_rgba(11,83,148,0.3)] uppercase whitespace-nowrap [-webkit-text-stroke:0.75px_#0b5394] [text-shadow:0.6px_0_0_#0b5394,-0.6px_0_0_#0b5394,0_0.6px_0_#0b5394,0_-0.6px_0_#0b5394]">GENIUS EDUCATIONAL ACADEMY</h1>
               <p className="text-[9px] sm:text-xs text-primary leading-tight font-bold whitespace-nowrap">Your dreams does not exist, you must create it.</p>
             </div>
           </Link>
