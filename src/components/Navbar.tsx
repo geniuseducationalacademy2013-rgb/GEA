@@ -73,13 +73,13 @@ export default function Navbar() {
             <img
               src="/content/logo/geniuslogo.png"
               alt="Genius Educational Academy Logo"
-              className="h-10 sm:h-12 lg:h-14 w-auto object-contain drop-shadow-[0_4px_6px_rgba(0,0,0,0.3)] flex-shrink-0"
+              className="h-8 sm:h-12 lg:h-14 w-auto object-contain drop-shadow-[0_4px_6px_rgba(0,0,0,0.3)] flex-shrink-0"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
             />
             <div className="block min-w-0">
-              <h1 className="text-[0.95rem] sm:text-[clamp(0.72rem,1.35vw,1.15rem)] font-cooper-black font-black text-[#0b5394] leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(11,83,148,0.3)] uppercase whitespace-nowrap">GENIUS EDUCATIONAL ACADEMY</h1>
+              <h1 className="text-[0.72rem] sm:text-[clamp(0.72rem,1.35vw,1.15rem)] font-cooper-black font-black text-[#0b5394] leading-tight tracking-normal sm:tracking-wide drop-shadow-[0_2px_8px_rgba(11,83,148,0.3)] uppercase whitespace-nowrap">GENIUS EDUCATIONAL ACADEMY</h1>
               <p className="text-[9px] sm:text-xs text-primary leading-tight font-bold whitespace-nowrap">Your dreams does not exist, you must create it.</p>
             </div>
           </Link>
