@@ -69,7 +69,7 @@ export default function Navbar() {
     >
       <div className="w-full px-4 sm:px-6 lg:px-0">
         <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center gap-1 sm:gap-2 lg:gap-3 lg:ml-8 overflow-hidden">
+          <Link href="/" className="flex items-center gap-1 sm:gap-2 lg:gap-3 lg:ml-8 flex-1 min-w-0 pr-2">
             <img
               src="/content/logo/geniuslogo.png"
               alt="Genius Educational Academy Logo"
@@ -78,14 +78,14 @@ export default function Navbar() {
                 e.currentTarget.style.display = 'none';
               }}
             />
-            <div className="block overflow-hidden">
-              <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-cooper-black text-[#0b5394] leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(11,83,148,0.3)] uppercase whitespace-nowrap">GENIUS EDUCATIONAL ACADEMY</h1>
+            <div className="block min-w-0">
+              <h1 className="text-[clamp(0.72rem,1.35vw,1.15rem)] font-cooper-black text-[#0b5394] leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(11,83,148,0.3)] uppercase whitespace-nowrap">GENIUS EDUCATIONAL ACADEMY</h1>
               <p className="text-[9px] sm:text-xs text-primary leading-tight font-bold whitespace-nowrap">Your dreams does not exist, you must create it.</p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1 lg:mr-8">
+          <div className="hidden lg:flex items-center space-x-1 lg:mr-8 flex-shrink-0">
             {navItems.map((item) => (
               <div
                 key={item.name}
